@@ -2,6 +2,7 @@ import React from 'react';
 import createClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+// import 'react-select/dist/react-select.css';
 
 // const FLAVOURS = [
 // 	{ label: 'Chocolate', value: 'chocolate' },
@@ -16,7 +17,7 @@ import Select from 'react-select';
 // 	{ label: 'Chocolate (are you crazy?)', value: 'chocolate', disabled: true },
 // ].concat(FLAVOURS.slice(1));
 
-class CustomSelect extends React.Component {
+class CustomStyling extends React.Component {
   constructor(props){
     super(props);
   }
@@ -53,11 +54,21 @@ class CustomSelect extends React.Component {
   }
 
   filterByOptions = (filters) => {
+    // console.log(filters);
     const newData = this.state.someData.filter(data =>{
-      const passed = filters.some(filter => data.value >= filter.value);
+      // console.log(data);
+      const passed = filters.some(filter => {
+        console.log(data.value >= filter.value)
+        // console.dir({
+        //   filterValue: filter.value,
+        //   dataValue: data.value,
+        // })
+        return data.value >= filter.value;
+      });
       if(passed)
         return data;
-    });
+    })
+    console.log(newData)
     this.setState({filtered: newData});
     // console.log(this.state);
   }
@@ -80,7 +91,7 @@ class CustomSelect extends React.Component {
 		);
 	}
 };
-CustomSelect.propTypes = {
+CustomStyling.propTypes = {
   
 }
-export default CustomSelect;
+export default CustomStyling;
