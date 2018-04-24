@@ -1,6 +1,13 @@
 import chroma from 'chroma-js';
 const colourStyles = {
-  control: styles => ({ ...styles, backgroundColor: 'white' }),
+  control: (styles, { isFocused }) => {
+    const bgColor = isFocused ? 'white' : '#038ACE'
+    return { 
+      ...styles, 
+      backgroundColor: bgColor
+    }
+  },
+  placeholder: styles => ({...styles, color:'white', fontSize: '1.5em'}),
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     const color = chroma(data.color);
     return {
