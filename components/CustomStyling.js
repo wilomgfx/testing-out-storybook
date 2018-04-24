@@ -2,20 +2,20 @@ import React from 'react';
 import createClass from 'create-react-class';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-// import 'react-select/dist/react-select.css';
+import CustomColorStyles from '../styles/CustomColorStyles'
 
-// const FLAVOURS = [
-// 	{ label: 'Chocolate', value: 'chocolate' },
-// 	{ label: 'Vanilla', value: 'vanilla' },
-// 	{ label: 'Strawberry', value: 'strawberry' },
-// 	{ label: 'Caramel', value: 'caramel' },
-// 	{ label: 'Cookies and Cream', value: 'cookiescream' },
-// 	{ label: 'Peppermint', value: 'peppermint' },
-// ];
-
-// const WHY_WOULD_YOU = [
-// 	{ label: 'Chocolate (are you crazy?)', value: 'chocolate', disabled: true },
-// ].concat(FLAVOURS.slice(1));
+const someData = [
+  { value: 'ocean', label: 'Ocean', color: '#00B8D9' },
+  { value: 'blue', label: 'Blue', color: '#0052CC', disabled: true },
+  { value: 'purple', label: 'Purple', color: '#5243AA' },
+  { value: 'red', label: 'Red', color: '#FF5630' },
+  { value: 'orange', label: 'Orange', color: '#FF8B00' },
+  { value: 'yellow', label: 'Yellow', color: '#FFC400' },
+  { value: 'green', label: 'Green', color: '#36B37E' },
+  { value: 'forest', label: 'Forest', color: '#00875A' },
+  { value: 'slate', label: 'Slate', color: '#253858' },
+  { value: 'silver', label: 'Silver', color: '#666666' },
+];
 
 class CustomStyling extends React.Component {
   constructor(props){
@@ -25,18 +25,6 @@ class CustomStyling extends React.Component {
       filters: [],
       filtered: [],
       value: [],
-      someData: [
-        { name: 'Potato street', value: 1000},
-        { name: 'Sweet baby jesus street', value: 1200},
-        { name: 'Popo street', value: 1900},
-        { name: 'Pickle street', value: 2000},
-        { name: 'Bus street', value: 2100},
-        { name: 'Sad street', value: 2500},
-        { name: 'Happy street', value: 2400},
-        { name: 'Jane Doe street', value: 3100},
-        { name: 'John Doe street', value: 3999},
-        { name: 'Beverly hils', value: 4000},
-      ]
   }
   
 	handleSelectChange = (value) => {
@@ -55,7 +43,7 @@ class CustomStyling extends React.Component {
 
   filterByOptions = (filters) => {
     // console.log(filters);
-    const newData = this.state.someData.filter(data =>{
+    const newData = someData.filter(data =>{
       // console.log(data);
       const passed = filters.some(filter => {
         console.log(data.value >= filter.value)
@@ -74,19 +62,21 @@ class CustomStyling extends React.Component {
   }
 
 	render () {
-    const { value, someData, filtered } = this.state;
-    const { options, simple, multi } = this.props;
+    const { value, filtered } = this.state;
+    const { options, isMulti } = this.props;
     const dataToShow = filtered.length > 0  ? filtered : someData;
 		return (
 			<div className="section">
 				<Select
-					multi={multi}
+          isMulti={isMulti}
+          defaultValue={[someData[0], someData[1]]}
 					onChange={this.handleSelectChange}
-					options={options}
-					placeholder="Select your favourite(s)"
-					value={value}
+					options={someData}
+					placeholder="Select colors"
+          value={value}
+          styles={CustomColorStyles}
         />
-        <ul>{dataToShow.map(data => <li key={data.name}>{data.name} : at {data.value}</li>)}</ul>
+        <ul>{dataToShow.map(data => <li key={data.color}>{data.color} : at {data.value}</li>)}</ul>
 			</div>
 		);
 	}
