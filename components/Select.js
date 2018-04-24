@@ -1,7 +1,7 @@
 import React from 'react'
 import Select from 'react-select';
 import { action } from '@storybook/addon-actions';
-import 'react-select/dist/react-select.css';
+// import 'react-select/dist/react-select.css';
 
 class SomeSelect extends React.Component {
   state = {

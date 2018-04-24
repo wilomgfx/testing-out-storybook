@@ -64,12 +64,12 @@ class CustomSelect extends React.Component {
 
 	render () {
     const { value, someData, filtered } = this.state;
-    const { options, simple, multi } = this.props;
+    const { options, isMulti } = this.props;
     const dataToShow = filtered.length > 0  ? filtered : someData;
 		return (
 			<div className="section">
 				<Select
-					multi={multi}
+					isMulti={isMulti}
 					onChange={this.handleSelectChange}
 					options={options}
 					placeholder="Select your favourite(s)"
